@@ -42,3 +42,7 @@ link.FATAL(args ...interface{})
 ```
 
 [glog](https://github.com/slclub/glog)
+
+
+### etc floder just for testing used.
+
