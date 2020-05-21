@@ -25,6 +25,15 @@ Add more source code if it like log system and config etc in the future.
 // return *viper.Viper
 link.Config() 
 ```
+- Default config file position is in your project directory 
+Here i didn't create the config file. you should create it by yourself.
+
+example:  
+```go
+prject : /home/xxx/web
+config : /home/xxx/web/etc/go.ini
+```
+
 [viper](https://github.com/spf13/viper)
 
 ### Wrap glog.
