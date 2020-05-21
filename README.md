@@ -1,5 +1,5 @@
 # link
-code link point.   
+Code link point.  Decoupling is also one of its purposes.
 
 When you use other source code, try to encapsulate it as much as possible. 
 
