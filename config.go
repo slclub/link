@@ -51,22 +51,21 @@ func GetSize(key string, default_value int) int {
 			continue
 		}
 		unit = 1
-		if v == 'k' || v == 'K' {
+		switch v {
+		case 'k', 'K':
 			unit = 1024
-			break
-		}
-
-		if v == 'm' || v == 'M' {
+			goto WALK
+		case 'm', 'M':
 			unit = 1024 * 1024
 			break
-		}
-
-		if v == 'g' || v == 'G' {
+		case 'g', 'G':
 			unit = 1024 * 1024 * 1024
 			break
+
 		}
 	}
 
+WALK:
 	size, ret := strconv.Atoi(val[:begin])
 	if ret != nil {
 		return default_value
