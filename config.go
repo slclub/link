@@ -36,14 +36,14 @@ func GetString(key, default_value string) string {
 }
 
 // 获取一些配置字符转化成数字
-func GetSize(key string, default_value int) int {
+func GetSizeInt64(key string, default_value int64) int64 {
 	val := conf.GetString(key)
 	if val == "" {
 		return default_value
 	}
 
 	begin := 0
-	unit := 0
+	var unit int64 = 0
 	for i, _ := range val {
 		v := val[i]
 		if _, ok := BYTE_NUMBER_MAP[v]; ok && unit == 0 {
@@ -65,12 +65,17 @@ func GetSize(key string, default_value int) int {
 	}
 
 WALK:
-	size, ret := strconv.Atoi(val[:begin])
+	size, ret := strconv.ParseInt(val[:begin], 10, 64)
 	if ret != nil {
 		return default_value
 	}
 	size *= unit
 	return size
+}
+
+func GetSize(key string, default_value int) int {
+	val := GetSizeInt64(key, int64(default_value))
+	return int(val)
 }
 
 func newConfig() *viper.Viper {
