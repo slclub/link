@@ -57,11 +57,10 @@ func GetSize(key string, default_value int) int {
 			goto WALK
 		case 'm', 'M':
 			unit = 1024 * 1024
-			break
+			goto WALK
 		case 'g', 'G':
 			unit = 1024 * 1024 * 1024
-			break
-
+			goto WALK
 		}
 	}
 
