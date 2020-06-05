@@ -7,12 +7,14 @@ import (
 	"github.com/spf13/viper"
 	"os"
 	"path/filepath"
+	"strconv"
 	"sync"
 )
 
 var mu sync.Mutex
 var conf *viper.Viper
 var app_path, _ = os.Getwd()
+var BYTE_NUMBER_MAP map[byte]uint8 = map[byte]uint8{'0': 1, '1': 1, '2': 1, '3': 1, '4': 1, '5': 1, '6': 1, '7': 1, '8': 1, '9': 1}
 
 func init() {
 	conf = newConfig()
@@ -31,6 +33,46 @@ func GetString(key, default_value string) string {
 	}
 
 	return default_value
+}
+
+// 获取一些配置字符转化成数字
+func GetSize(key string, default_value int) int {
+	val := conf.GetString(key)
+	if val == "" {
+		return default_value
+	}
+
+	begin := 0
+	unit := 0
+	for i, _ := range val {
+		v := val[i]
+		if _, ok := BYTE_NUMBER_MAP[v]; ok && unit == 0 {
+			begin++
+			continue
+		}
+		unit = 1
+		if v == 'k' || v == 'K' {
+			unit = 1024
+			break
+		}
+
+		if v == 'm' || v == 'M' {
+			unit = 1024 * 1024
+			break
+		}
+
+		if v == 'g' || v == 'G' {
+			unit = 1024 * 1024 * 1024
+			break
+		}
+	}
+
+	size, ret := strconv.Atoi(val[:begin])
+	if ret != nil {
+		return default_value
+	}
+	size *= unit
+	return size
 }
 
 func newConfig() *viper.Viper {

@@ -16,12 +16,13 @@ func TestLog(t *testing.T) {
 		f1()
 	}
 
-	var ch_out = make(chan int)
+	var ch_out = make(chan int, 1)
 	ch_out <- 1
 
 	for {
 		select {
 		case <-ch_out:
+			t.Log("OUT WITH RETURN")
 			return
 		}
 	}
