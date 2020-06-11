@@ -26,4 +26,9 @@ func TestLog(t *testing.T) {
 			return
 		}
 	}
+
+}
+
+func TestDebug_print(t *testing.T) {
+	DEBUG_PRINT("debug", " nothing")
 }

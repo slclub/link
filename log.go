@@ -1,8 +1,10 @@
 package link
 
 import (
+	"fmt"
 	"github.com/slclub/glog"
 	"github.com/spf13/viper"
+	"os"
 )
 
 func logInit(conf *viper.Viper) {
@@ -31,4 +33,13 @@ func ERROR(args ...interface{}) {
 
 func FATAL(args ...interface{}) {
 	glog.FatalDepth(1, args...)
+}
+
+func DEBUG_PRINT(args ...interface{}) {
+	debug := GetString("debug", "panic")
+	writer := os.Stdout
+	if debug == "panic" {
+		writer = os.Stdout
+	}
+	fmt.Fprint(writer, args...)
 }
