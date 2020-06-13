@@ -8,7 +8,7 @@ import (
 )
 
 func logInit(conf *viper.Viper) {
-	glog.Set("path", GetString("log.abs_path", app_path), conf.GetString("log.rel_path"))
+	glog.Set("path", GetString("log.abs_path", APP_PATH), conf.GetString("log.rel_path"))
 	glog.Set("name", GetString("log.name", "glog"))
 	glog.Set("head", GetString("log.head", ""))
 	glog.Set("stderr", conf.GetBool("log.stderr"))
@@ -41,5 +41,6 @@ func DEBUG_PRINT(args ...interface{}) {
 	if debug == "panic" {
 		writer = os.Stdout
 	}
+	args = append(args, "\n")
 	fmt.Fprint(writer, args...)
 }

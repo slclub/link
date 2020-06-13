@@ -13,7 +13,7 @@ import (
 
 var mu sync.Mutex
 var conf *viper.Viper
-var app_path, _ = os.Getwd()
+var APP_PATH, _ = os.Getwd()
 var BYTE_NUMBER_MAP map[byte]uint8 = map[byte]uint8{'0': 1, '1': 1, '2': 1, '3': 1, '4': 1, '5': 1, '6': 1, '7': 1, '8': 1, '9': 1}
 
 func init() {
@@ -79,7 +79,7 @@ func GetSize(key string, default_value int) int {
 }
 
 func newConfig() *viper.Viper {
-	config_path, err := os.Getwd()
+	APP_PATH, err := os.Getwd()
 	if err != nil {
 		panic("[LINK][config] path error:" + err.Error())
 	}
@@ -91,7 +91,7 @@ func newConfig() *viper.Viper {
 	vp := viper.New()
 	vp.SetConfigType("ini")
 	vp.SetConfigName("go.ini")
-	vp.AddConfigPath(filepath.Join(config_path, "etc"))
+	vp.AddConfigPath(filepath.Join(APP_PATH, "etc"))
 	err = readConfig(vp)
 	if err != nil {
 		fmt.Println(err)
