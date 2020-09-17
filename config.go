@@ -19,6 +19,14 @@ var BYTE_NUMBER_MAP map[byte]uint8 = map[byte]uint8{'0': 1, '1': 1, '2': 1, '3':
 func init() {
 	conf = newConfig()
 	logInit(conf)
+	APP_PATH = get_root_path()
+}
+func get_root_path() string {
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		fmt.Println(err)
+	}
+	return dir
 }
 
 // From here get viper struct *viper.Viper.

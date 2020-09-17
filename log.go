@@ -12,7 +12,7 @@ func logInit(conf *viper.Viper) {
 	glog.Set("name", GetString("log.name", "glog"))
 	glog.Set("head", GetString("log.head", ""))
 	glog.Set("stderr", conf.GetBool("log.stderr"))
-	glog.Set("debug", conf.GetBool("server1.debug"))
+	glog.Set("debug", conf.GetBool("log.debug"))
 }
 
 func INFO(args ...interface{}) {

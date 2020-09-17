@@ -19,6 +19,8 @@ func TestConfig(t *testing.T) {
 	// not exist
 	val := GetString("form.not exist", "Not found")
 	assert.Equal(t, "Not found", val)
+
+	fmt.Println("app path:", APP_PATH)
 }
 
 func TestGetSize(t *testing.T) {
