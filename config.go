@@ -26,6 +26,10 @@ func get_root_path() string {
 	if err != nil {
 		fmt.Println(err)
 	}
+	// For testing command.
+	if dir[:4] == "/tmp" {
+		dir, err = os.Getwd()
+	}
 	return dir
 }
 
@@ -87,10 +91,6 @@ func GetSize(key string, default_value int) int {
 }
 
 func newConfig() *viper.Viper {
-	APP_PATH, err := os.Getwd()
-	if err != nil {
-		panic("[LINK][config] path error:" + err.Error())
-	}
 	var env string
 	if env = os.Getenv("ENV"); env == "" {
 		env = "dev"
@@ -100,7 +100,7 @@ func newConfig() *viper.Viper {
 	vp.SetConfigType("ini")
 	vp.SetConfigName("go.ini")
 	vp.AddConfigPath(filepath.Join(APP_PATH, "etc"))
-	err = readConfig(vp)
+	err := readConfig(vp)
 	if err != nil {
 		fmt.Println(err)
 	}
