@@ -17,9 +17,9 @@ var APP_PATH, _ = os.Getwd()
 var BYTE_NUMBER_MAP map[byte]uint8 = map[byte]uint8{'0': 1, '1': 1, '2': 1, '3': 1, '4': 1, '5': 1, '6': 1, '7': 1, '8': 1, '9': 1}
 
 func init() {
+	APP_PATH = get_root_path()
 	conf = newConfig()
 	logInit(conf)
-	APP_PATH = get_root_path()
 }
 func get_root_path() string {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
